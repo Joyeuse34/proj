@@ -1,0 +1,45 @@
+<!-- file_upload/templates/file_upload/upload.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Files</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        form { margin-top: 20px; }
+        input[type="file"] { margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #007BFF; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .error { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Upload Files to Generate Student Documents</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label>Excel File (.xlsx)</label><br>
+            {{ form.excel_file }}
+        </div>
+        <div>
+            <label>Yollanma Template (.docx)</label><br>
+            {{ form.yollanma_template }}
+        </div>
+        <div>
+            <label>Shartnoma Template (.docx)</label><br>
+            {{ form.shartnoma_template }}
+        </div>
+        <div>
+            <label>Kundalik Template (.docx)</label><br>
+            {{ form.kundalik_template }}
+        </div>
+        <button type="submit">Process Files</button>
+    </form>
+    {% if form.errors %}
+        <div class="error">
+            <p>Please correct the following errors:</p>
+            {{ form.errors }}
+        </div>
+    {% endif %}
+</body>
+</html>
